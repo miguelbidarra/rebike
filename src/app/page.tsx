@@ -1,110 +1,231 @@
 "use client";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 function HomePage() {
+  // Motion variants for animation reuse
+  const fadeIn = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 1 } },
+  };
+
+  const slideIn = {
+    hidden: { x: -100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 1, ease: "easeInOut" },
+    },
+  };
+
+  const hoverEffect = {
+    hover: { scale: 1.05, boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.2)" },
+    tap: { scale: 0.95 },
+  };
+
   return (
-    <div className="bg-gray-900 text-white">
+    <div className="bg-background text-text">
       {/* Hero Section */}
-      <section className="h-[calc(100vh-7rem)] flex flex-col justify-center items-center p-8 bg-cover bg-center relative">
-        <img
-          src="/puzzle-bg.jpg"
-          alt="Puzzle Background"
-          className="absolute inset-0 w-full h-full object-cover object-right z-0 filter blur-lg"
-        />
-        <div className="relative z-10 text-center">
-          <h1 className="text-6xl font-bold mb-4 text-yellow-400">Puzzle Monthly</h1>
-          <p className="text-2xl max-w-2xl text-pink-300">
-            Discover a new 3D printed puzzle every month! Delivered straight to your door.
-          </p>
-          <motion.button
-            className="mt-8 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg text-xl"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+      <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-r from-purple-600 to-indigo-600">
+        <div className="container px-4 md:px-6">
+          <motion.div
+            className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]"
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
           >
-            Subscribe Now
-          </motion.button>
+            <div className="flex flex-col justify-center space-y-4 lg:pe-12">
+              <motion.div
+                className="space-y-2 text-center lg:text-left"
+                initial="hidden"
+                animate="visible"
+                variants={slideIn}
+              >
+                <motion.h1
+                  className="text-3xl font-bold tracking-tighter text-white sm:text-5xl xl:text-6xl"
+                  initial={{ opacity: 0, y: -50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1 }}
+                >
+                  Unlock Your Mind
+                </motion.h1>
+                <motion.p
+                  className="max-w-[600px] text-zinc-200 md:text-xl mx-auto lg:mx-0"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1 }}
+                >
+                  Challenge yourself with our Monthly Puzzle subscription. A new
+                  brain-teaser delivered to your inbox every month.
+                </motion.p>
+              </motion.div>
+              <motion.div className="w-full max-w-sm space-y-2 mx-auto lg:mx-0 text-center lg:text-left">
+                <motion.button
+                  className="bg-white text-purple-600 hover:bg-zinc-100 px-8 py-4 rounded-lg text-xl"
+                  variants={hoverEffect}
+                  whileHover="hover"
+                  whileTap="tap"
+                >
+                  Start Puzzling Now
+                </motion.button>
+                <p className="text-xs text-zinc-300">
+                  No credit card required. Cancel anytime.
+                </p>
+              </motion.div>
+            </div>
+            <motion.div
+              className="flex items-center justify-center"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <Image
+                alt="Puzzle Pieces"
+                className="aspect-[4/3] overflow-hidden rounded-xl object-cover object-center"
+                height={400}
+                src="/placeholder.svg?height=400&width=600"
+                width={600}
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500">
+      <section className="py-16 px-4 bg-gradient-to-r from-purple-600 to-indigo-600">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8 text-white">Why Puzzle Monthly?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-yellow-300 p-6 rounded-lg shadow-lg">
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">1. Boost your IQ</h3>
-              <p className="text-lg text-gray-800">Engage your brain with challenging puzzles that help improve your cognitive skills.</p>
-            </div>
-            <div className="bg-green-300 p-6 rounded-lg shadow-lg">
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">2. Impress your friends</h3>
-              <p className="text-lg text-gray-800">Show off your puzzle-solving skills and impress your friends with unique designs.</p>
-            </div>
-            <div className="bg-blue-300 p-6 rounded-lg shadow-lg">
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">3. Have fun!</h3>
-              <p className="text-lg text-gray-800">Enjoy hours of entertainment and satisfaction with each new puzzle.</p>
-            </div>
-          </div>
+          <motion.h2
+            className="text-4xl font-bold mb-8 text-background"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            Why Puzzle Monthly?
+          </motion.h2>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={{
+              visible: {
+                transition: { staggerChildren: 0.2 },
+              },
+            }}
+          >
+            {[
+              {
+                number: "1",
+                title: "Boost IQ",
+                description: "Engage your brain.",
+              },
+              {
+                number: "2",
+                title: "Impress Friends",
+                description: "Show off your skills.",
+              },
+              {
+                number: "3",
+                title: "Have Fun!",
+                description: "Enjoy hours of entertainment.",
+              },
+            ].map((feature, index) => (
+              <motion.div
+                className="flex flex-col items-center justify-center p-6 rounded-full bg-secondary shadow-lg hover:bg-white transition-colors duration-300 border-4 border-purple-600 hover:border-accent"
+                variants={fadeIn}
+                whileHover={{ scale: 1.05 }}
+                key={index}
+              >
+                <motion.div className="text-5xl font-bold text-purple-600 mb-2">
+                  {feature.number}
+                </motion.div>
+                <h3 className="text-lg font-bold text-text mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-sm text-text text-center">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
       {/* Pricing Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600">
+      <section className="py-16 px-4 bg-gradient-to-r from-purple-600 to-indigo-600">
         <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8 text-white">Our Pricing</h2>
-          <div className="flex flex-col md:flex-row justify-around items-center">
-            <div className="bg-white text-black p-8 m-4 rounded-lg shadow-lg w-full max-w-sm">
-              <h3 className="text-3xl font-bold mb-4">Normal</h3>
-              <p className="text-2xl mb-4">$10/month</p>
-              <ul className="text-lg mb-4">
-                <li className="mb-2">1 Puzzle Delivered Monthly</li>
-                <li className="mb-2">Basic Difficulty</li>
-                <li>Standard Shipping</li>
-              </ul>
-              <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg text-xl">Choose Plan</button>
-            </div>
-            <div className="bg-white text-black p-8 m-4 rounded-lg shadow-lg w-full max-w-sm">
-              <h3 className="text-3xl font-bold mb-4">Premium</h3>
-              <p className="text-2xl mb-4">$20/month</p>
-              <ul className="text-lg mb-4">
-                <li className="mb-2">1 Puzzle Delivered Monthly</li>
-                <li className="mb-2">Advanced Difficulty</li>
-                <li>Priority Shipping</li>
-              </ul>
-              <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg text-xl">Choose Plan</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-8 text-white">What Our Customers Say</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <p className="text-lg mb-4 text-gray-900">
-                "Puzzle Monthly has been a game-changer for me! The puzzles are always challenging and fun. I look forward to my delivery every month."
-              </p>
-              <h3 className="text-xl font-bold text-gray-900">- Alex B.</h3>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <p className="text-lg mb-4 text-gray-900">
-                "I signed up for the Premium plan, and the puzzles have been top-notch. They’re intricate, unique, and definitely worth the price!"
-              </p>
-              <h3 className="text-xl font-bold text-gray-900">- Sarah P.</h3>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-lg">
-              <p className="text-lg mb-4 text-gray-900">
-                "The variety and quality of puzzles are excellent! I’ve recommended Puzzle Monthly to all my puzzle-loving friends."
-              </p>
-              <h3 className="text-xl font-bold text-gray-900">- Michael R.</h3>
-            </div>
+          <motion.h2
+            className="text-5xl font-bold mb-10 text-background"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            Unlock Your Puzzle Adventure
+          </motion.h2>
+          <div className="flex flex-col md:flex-row justify-center items-start">
+            {[
+              {
+                plan: "Basic",
+                price: "10€",
+                features: [
+                  "1 Monthly Puzzle",
+                  "Casual Difficulty",
+                  "Free Shipping",
+                ],
+                description: "Perfect for beginners!",
+              },
+              {
+                plan: "Plus",
+                price: "20€",
+                features: [
+                  "1 Challenging Puzzle/Month",
+                  "Expert Difficulty",
+                  "Expedited Shipping",
+                ],
+                description: "For seasoned puzzlers!",
+              },
+            ].map((pricing, index) => (
+              <motion.div
+                className="bg-secondary text-text p-8 m-4 rounded-lg shadow-lg w-full max-w-xs transform transition-transform duration-300 hover:scale-105"
+                key={index}
+                variants={fadeIn}
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="relative mb-6">
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-accent text-background text-4xl font-bold p-4 rounded-full">
+                    {pricing.plan}
+                  </div>
+                  <div className="mt-10 mb-4 text-3xl font-bold">
+                    {pricing.price} <span className="text-lg">/ month</span>
+                  </div>
+                </div>
+                <p className="text-lg italic mb-4">{pricing.description}</p>
+                <ul className="text-lg mb-6">
+                  {pricing.features.map((feature, idx) => (
+                    <li key={idx} className="mb-2 flex items-center">
+                      <span className="mr-2 text-xl text-accent">✔️</span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <motion.button
+                  className="bg-primary hover:bg-accent text-background px-8 py-3 rounded-lg text-xl transition-colors duration-300 shadow-md"
+                  variants={hoverEffect}
+                  whileHover="hover"
+                  whileTap="tap"
+                >
+                  Get Started
+                </motion.button>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-gray-900 text-center text-gray-500">
+      <footer className="py-8 bg-gradient-to-r from-purple-600 to-indigo-600 text-center text-text">
         <p>&copy; 2024 Puzzle Monthly. All rights reserved.</p>
       </footer>
     </div>
