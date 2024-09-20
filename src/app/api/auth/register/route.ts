@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import db from "@/libs/db";
 
-export async function POST(request) {
+export async function POST(request: Request) {
   try {
     const data = await request.json();
 
@@ -49,7 +49,7 @@ export async function POST(request) {
       },
     });
 
-    const { password: _, ...user } = newUser;
+    const { password, ...user } = newUser;
 
     return NextResponse.json(user);
   } catch (error) {

@@ -12,6 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import Image from "next/image";
 
 const puzzles = [
   {
@@ -77,9 +78,11 @@ export default function Component() {
                       <CardTitle className="text-primary">{puzzle.name}</CardTitle>
                     </CardHeader>
                     <CardContent className="flex-grow">
-                      <img
+                      <Image
                         src={puzzle.image}
                         alt={puzzle.name}
+                        width={200}
+                        height={200}
                         className="w-full h-48 object-cover mb-4 rounded-md"
                       />
                       <p className="text-lg text-accent">{puzzle.edition}</p>
@@ -92,9 +95,11 @@ export default function Component() {
                 <DialogHeader>
                   <DialogTitle className="text-primary">{selectedPuzzle?.name}</DialogTitle>
                   <DialogDescription>
-                    <img
+                    <Image
                       src={selectedPuzzle?.image}
                       alt={selectedPuzzle?.name}
+                      width={200}
+                      height={200}
                       className="w-full h-48 object-cover my-4 rounded-md"
                     />
                     <p className="mb-2">{selectedPuzzle?.description}</p>

@@ -2,8 +2,14 @@
 import Link from "next/link";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa"; // Importing a hamburger icon for mobile responsiveness
+import Image from "next/image";
+import { Session } from "next-auth"; // Importing Session type from next-auth
 
-export default function Navbar({ session }: { session: any }) {
+interface NavbarProps {
+  session: Session;
+}
+
+export default function Navbar({ session }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -11,7 +17,11 @@ export default function Navbar({ session }: { session: any }) {
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <Link href="/">
-            <img src="/logo.png" alt="Logo" className="h-8 md:h-10 cursor-pointer" />
+            <img
+              src="/logo.png"
+              alt="Logo"
+              className="h-8 md:h-10 cursor-pointer"
+            />
           </Link>
         </div>
 
@@ -21,30 +31,46 @@ export default function Navbar({ session }: { session: any }) {
           </button>
         </div>
 
-        <div className={`flex-1 md:flex justify-center items-center ${isOpen ? 'block' : 'hidden'} md:block`}>
+        <div
+          className={`flex-1 md:flex justify-center items-center ${
+            isOpen ? "block" : "hidden"
+          } md:block`}
+        >
           <ul className="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0 text-center">
             <li>
-              <Link href="/" className="hover:text-primary">Home</Link>
+              <Link href="/" className="hover:text-primary">
+                Home
+              </Link>
             </li>
             <li>
-              <Link href="/puzzles" className="hover:text-primary">Puzzles</Link>
+              <Link href="/puzzles" className="hover:text-primary">
+                Puzzles
+              </Link>
             </li>
             {!session?.user ? (
               <>
                 <li>
-                  <Link href="/auth/login" className="hover:text-primary">Login</Link>
+                  <Link href="/auth/login" className="hover:text-primary">
+                    Login
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/auth/register" className="hover:text-primary">Register</Link>
+                  <Link href="/auth/register" className="hover:text-primary">
+                    Register
+                  </Link>
                 </li>
               </>
             ) : (
               <>
                 <li>
-                  <Link href="/dashboard" className="hover:text-primary">Dashboard</Link>
+                  <Link href="/playground" className="hover:text-primary">
+                    Playground
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/api/auth/signout" className="hover:text-primary">Logout</Link>
+                  <Link href="/api/auth/signout" className="hover:text-primary">
+                    Logout
+                  </Link>
                 </li>
               </>
             )}
