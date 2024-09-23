@@ -11,7 +11,7 @@ function LoginPage() {
     formState: { errors },
   } = useForm();
   const router = useRouter();
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   const onSubmit = handleSubmit(async (data) => {
     const res = await signIn("credentials", {
@@ -20,22 +20,22 @@ function LoginPage() {
       redirect: false,
     });
 
-    if (res.error) {
+    if (res && res.error) {
       setError(res.error);
     } else {
-      router.push('/dashboard');
+      router.push('/bikes');
       router.refresh();
     }
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-purple-600 to-indigo-600 flex justify-center items-center p-4">
-      <form onSubmit={onSubmit} className="w-full max-w-md bg-background p-8 rounded-lg shadow-lg">
+    <div className="min-h-screen flex justify-center items-center p-4">
+      <form onSubmit={onSubmit} className="w-full max-w-md p-8 rounded-lg border border-secondary">
         {error && (
           <p className="bg-red-500 text-lg text-white p-3 rounded mb-2">{error}</p>
         )}
 
-        <h1 className="text-accent font-bold text-4xl mb-4 text-center">Login</h1>
+        <h1 className="text-primary font-bold text-4xl mb-4 text-center">Login</h1>
 
         <label htmlFor="email" className="text-black mb-2 block text-sm">
           Email:
@@ -51,7 +51,7 @@ function LoginPage() {
           className="p-3 rounded block mb-2 bg-white text-black w-full"
           placeholder="user@email.com"
         />
-        {errors.email && (
+        {typeof errors.email?.message === 'string' && (
           <span className="text-red-500 text-xs">{errors.email.message}</span>
         )}
 
@@ -69,11 +69,11 @@ function LoginPage() {
           className="p-3 rounded block mb-2 bg-white text-black w-full"
           placeholder="******"
         />
-        {errors.password && (
+        {typeof errors.password?.message === 'string' && (
           <span className="text-red-500 text-xs">{errors.password.message}</span>
         )}
 
-        <button className="w-full bg-blue-500 text-white p-3 rounded-lg mt-2 hover:bg-blue-600 transition-colors">
+        <button className="w-full bg-accent text-white p-3 rounded-lg mt-2 hover:bg-primary transition-colors">
           Login
         </button>
       </form>

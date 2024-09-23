@@ -16,3 +16,12 @@ model User {
   updatedAt DateTime @updatedAt
   name      String?
 }
+
+model Bicycle {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  image       String
+  gears       String
+  wheelSize   String
+  frameSize   String
+}

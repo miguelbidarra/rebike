@@ -1,97 +1,78 @@
-"use client"; // Make it a client-side component
+"use client"; // Client-side component
 import Link from "next/link";
 import { useState } from "react";
-import { FaBars } from "react-icons/fa"; // Importing a hamburger icon for mobile responsiveness
+import { FaBars, FaUserCircle } from "react-icons/fa"; // Mobile menu icon and account icon
 import Image from "next/image";
-import { Session } from "next-auth"; // Importing Session type from next-auth
 
-interface NavbarProps {
-  session: Session;
-}
-
-export default function Navbar({ session }: NavbarProps) {
+export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="bg-background text-text px-4 py-3 md:px-24">
       <div className="flex justify-between items-center">
-        <div className="flex items-center">
+        {/* Left - Logo */}
+        <div className="flex items-center space-x-4">
           <Link href="/">
-            <img
-              src="/logo.png"
+            <Image
+              src="/rebike.svg"
               alt="Logo"
-              className="h-8 md:h-10 cursor-pointer"
+              width={40}
+              height={40}
+              className="cursor-pointer"
             />
           </Link>
         </div>
 
+        {/* Center - Title and Buttons */}
+        <div className="flex-grow text-center flex items-center justify-center space-x-4">
+          <Link href="/auth/login">
+            <button className="text-primary hover:text-accent px-4 py-2">
+              I need a bike
+            </button>
+          </Link>
+          <Link href="/" className="text-2xl font-bold">
+            <span className="text-accent">re</span>
+            <span className="text-primary">Bike</span>
+          </Link>
+          <Link href="/auth/login">
+            <button className="text-primary hover:text-accent px-4 py-2">
+              I have a bike
+            </button>
+          </Link>
+        </div>
+
+        {/* Right - Account Icon */}
+        <div className="hidden md:flex space-x-4 items-center">
+          <Link href="/admin">
+            <FaUserCircle className="text-2xl text-primary hover:text-accent cursor-pointer" />
+          </Link>
+        </div>
+
+        {/* Mobile Menu Button */}
         <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)}>
             <FaBars className="text-2xl text-text" />
           </button>
         </div>
-
-        <div
-          className={`flex-1 md:flex justify-center items-center ${
-            isOpen ? "block" : "hidden"
-          } md:block`}
-        >
-          <ul className="flex flex-col md:flex-row md:space-x-4 space-y-2 md:space-y-0 text-center">
-            <li>
-              <Link href="/" className="hover:text-primary">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/puzzles" className="hover:text-primary">
-                Puzzles
-              </Link>
-            </li>
-            {!session?.user ? (
-              <>
-                <li>
-                  <Link href="/auth/login" className="hover:text-primary">
-                    Login
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/auth/register" className="hover:text-primary">
-                    Register
-                  </Link>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Link href="/playground" className="hover:text-primary">
-                    Playground
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/api/auth/signout" className="hover:text-primary">
-                    Logout
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
-        </div>
-
-        <div className="hidden md:flex items-center">
-          <Link href="/auth/login">
-            <button className="bg-primary hover:bg-accent text-background px-4 py-2 rounded ml-4">
-              Get it here
-            </button>
-          </Link>
-        </div>
       </div>
 
+      {/* Mobile Menu Links */}
       {isOpen && (
-        <div className="flex justify-center mt-4 md:hidden">
+        <div className="mt-4 md:hidden flex flex-col items-center space-y-2">
           <Link href="/auth/login">
-            <button className="bg-primary hover:bg-accent text-background px-4 py-2 rounded">
-              Get it here
+            <button className="text-primary hover:text-accent px-4 py-2">
+              I need a bike
             </button>
+          </Link>
+
+          <Link href="/auth/login">
+            <button className="text-primary hover:text-accent px-4 py-2">
+              I have a bike
+            </button>
+          </Link>
+
+          <Link href="/admin">
+            <FaUserCircle className="text-2xl text-primary hover:text-accent cursor-pointer" />
           </Link>
         </div>
       )}

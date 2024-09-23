@@ -8,7 +8,7 @@ import "./globals.css";
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata = {
-  title: "Puzzle Delivery",
+  title: "reBike",
   description: "Discover a new 3D printed puzzle every month! Delivered straight to your door.",
 };
 

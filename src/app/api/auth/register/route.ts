@@ -49,13 +49,13 @@ export async function POST(request: Request) {
       },
     });
 
-    const { password, ...user } = newUser;
+    const { ...user } = newUser;
 
     return NextResponse.json(user);
   } catch (error) {
     return NextResponse.json(
       {
-        message: error.message,
+        message: (error as Error).message,
       },
       {
         status: 500,
