@@ -93,7 +93,7 @@ const Admin = () => {
         },
         body: JSON.stringify(formData),
       });
-      alert("Bicycle updated successfully!");
+
       setEditingBicycle(null);
       setFormData({
         name: "",
@@ -121,7 +121,6 @@ const Admin = () => {
         },
         body: JSON.stringify({ id }),
       });
-      alert("Bicycle deleted successfully!");
       // Refresh the list of bicycles
       const response = await fetch("/api/bicycle");
       const data: Bicycle[] = await response.json();

@@ -12,7 +12,7 @@ const Hero = () => {
             Ride, Return, Repeat with rebike
           </h1>
           <p className="text-xl mb-8">
-            Your sustainable solution for short-term bike needs. Rent a
+            A sustainable solution for short-term bike needs. Rent a
             second-hand bike and return it when you&apos;re done.
           </p>
           <div className="space-x-4 md:flex md:justify-center">

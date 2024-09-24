@@ -21,7 +21,8 @@ export async function POST(request: Request) {
     console.error("POST error:", error);
     return NextResponse.json(
       {
-        message: error instanceof Error ? error.message : "An unknown error occurred",
+        message:
+          error instanceof Error ? error.message : "An unknown error occurred",
       },
       {
         status: 500,
@@ -34,14 +35,14 @@ export async function GET() {
   try {
     // Fetch all bicycles
     const bicycles = await db.bicycle.findMany();
-    console.log("Fetched bicycles:", bicycles);
 
     return NextResponse.json(bicycles);
   } catch (error) {
     console.error("GET error:", error);
     return NextResponse.json(
       {
-        message: error instanceof Error ? error.message : "An unknown error occurred",
+        message:
+          error instanceof Error ? error.message : "An unknown error occurred",
       },
       {
         status: 500,
@@ -64,7 +65,8 @@ export async function DELETE(request: Request) {
     console.error("DELETE error:", error);
     return NextResponse.json(
       {
-        message: error instanceof Error ? error.message : "An unknown error occurred",
+        message:
+          error instanceof Error ? error.message : "An unknown error occurred",
       },
       {
         status: 500,
@@ -94,7 +96,8 @@ export async function PUT(request: Request) {
     console.error("PUT error:", error);
     return NextResponse.json(
       {
-        message: error instanceof Error ? error.message : "An unknown error occurred",
+        message:
+          error instanceof Error ? error.message : "An unknown error occurred",
       },
       {
         status: 500,

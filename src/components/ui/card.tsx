@@ -1,13 +1,5 @@
 import * as React from "react";
 
-interface Bicycle {
-  id: number;
-  name: string;
-  image: string;
-  gears: number;
-  wheelSize: number;
-  frameSize: number;
-}
 
 const Card = React.forwardRef<HTMLDivElement, { className?: string }>(
   ({ className, children, ...props }, ref) => (

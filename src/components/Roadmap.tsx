@@ -31,7 +31,7 @@ const Roadmap = () => {
               </div>
               <div className="flex-grow">
                 <h1 className="text-foreground text-xl title-font font-medium mb-3">
-                  Use the bike until you no longer need it
+                  Ride your bike until you no longer need it
                 </h1>
               </div>
             </div>

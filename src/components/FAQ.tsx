@@ -1,7 +1,5 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { FaQuestionCircle } from "react-icons/fa";
-import { useState } from "react";
-
 interface FaqProps {
   openFaq: number | null;
   toggleFaq: (index: number) => void;
@@ -10,20 +8,20 @@ interface FaqProps {
 const FAQ: React.FC<FaqProps> = ({ openFaq, toggleFaq }) => {
   const faqs = [
     {
-      q: "How long can I keep the bike?",
-      a: "You can rent a bike for as short as a day or as long as several months. We offer flexible rental periods to suit your needs.",
+      q: "How long can I rent the bike?",
+      a: "You can rent a bike for 1 up to 6 months.",
     },
     {
       q: "What if the bike gets damaged?",
-      a: "We have an insurance policy that covers minor damages. For major damages, we assess each case individually.",
+      a: "You need to return it in the similar conditions and with no major damages.",
     },
     {
       q: "How do I return the bike?",
-      a: "You can return the bike to any of our designated return points. We&apos;ll provide you with a list of locations when you rent the bike.",
+      a: "You can return the bike by acessing your profile and choosing \"I want to return my bike\".",
     },
     {
-      q: "Are the bikes well-maintained?",
-      a: "Yes, all our bikes undergo a thorough inspection and maintenance check before being rented out to ensure they&apos;re in excellent condition.",
+      q: "What is the price of the rental?",
+      a: "To rent a bike you will need to leave a deposit along with the rental fee. On the return of the bike you imediatly get your deposit back.",
     },
   ];
 
@@ -32,7 +30,7 @@ const FAQ: React.FC<FaqProps> = ({ openFaq, toggleFaq }) => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row">
           {/* Left - Section Heading */}
-          <div className="md:w-1/3 flex flex-col items-center mb-12 md:mb-0 md:pr-8">
+          <div className="md:w-1/3 flex flex-col justify-center items-center mb-12 md:mb-0 md:pr-8">
             <h1
               className="text-5xl font-bold text-center"
               style={{ fontFamily: "Poppins, sans-serif" }}
