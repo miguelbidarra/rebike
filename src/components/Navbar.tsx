@@ -1,18 +1,19 @@
 "use client"; // Client-side component
 import Link from "next/link";
 import { useState } from "react";
-import { FaBars, FaUserCircle } from "react-icons/fa"; // Mobile menu icon and account icon
+import { FaUserCircle } from "react-icons/fa"; // Mobile menu icon and account icon
+import { TiThMenu } from "react-icons/ti";
 import Image from "next/image";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-background text-text px-4 py-3 md:px-24">
+    <nav className="fixed md:static top-0 w-full bg-background text-text px-4 py-3 md:px-24 z-50">
       <div className="flex justify-between items-center">
         {/* Left - Logo */}
         <div className="flex items-center space-x-4">
-          <Link href="/">
+          <Link href="/bikes">
             <Image
               src="/rebike.svg"
               alt="Logo"
@@ -25,7 +26,7 @@ export default function Navbar() {
 
         {/* Center - Title and Buttons */}
         <div className="flex-grow text-center flex items-center justify-center space-x-4">
-          <Link href="/auth/login">
+          <Link href="/auth/login" className="hidden sm:block">
             <button className="text-primary hover:text-accent px-4 py-2">
               I need a bike
             </button>
@@ -34,7 +35,7 @@ export default function Navbar() {
             <span className="text-accent">re</span>
             <span className="text-primary">Bike</span>
           </Link>
-          <Link href="/auth/login">
+          <Link href="/auth/login" className="hidden sm:block">
             <button className="text-primary hover:text-accent px-4 py-2">
               I have a bike
             </button>
@@ -51,7 +52,7 @@ export default function Navbar() {
         {/* Mobile Menu Button */}
         <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)}>
-            <FaBars className="text-2xl text-text" />
+            <TiThMenu className="text-2xl text-primary" />
           </button>
         </div>
       </div>

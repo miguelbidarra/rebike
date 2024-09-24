@@ -40,6 +40,16 @@ const Admin = () => {
     });
   };
 
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name, placeholder } = e.target;
+    if (!formData[name as keyof typeof formData]) {
+      setFormData({
+        ...formData,
+        [name]: placeholder,
+      });
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -151,8 +161,9 @@ const Admin = () => {
           name="name"
           value={formData.name}
           onChange={handleChange}
+          onFocus={handleFocus}
           className="p-3 rounded block mb-2 bg-white text-black w-full"
-          placeholder="Purple Blaze"
+          placeholder="Blue Mountain"
           required
         />
 
@@ -164,6 +175,7 @@ const Admin = () => {
           name="image"
           value={formData.image}
           onChange={handleChange}
+          onFocus={handleFocus}
           className="p-3 rounded block mb-2 bg-white text-black w-full"
           placeholder="/bike-placeholder.jpg?height=400&width=400"
           required
@@ -177,8 +189,9 @@ const Admin = () => {
           name="gears"
           value={formData.gears}
           onChange={handleChange}
+          onFocus={handleFocus}
           className="p-3 rounded block mb-2 bg-white text-black w-full"
-          placeholder="21-speed"
+          placeholder="18-speed"
           required
         />
 
@@ -190,8 +203,9 @@ const Admin = () => {
           name="wheelSize"
           value={formData.wheelSize}
           onChange={handleChange}
+          onFocus={handleFocus}
           className="p-3 rounded block mb-2 bg-white text-black w-full"
-          placeholder="26 inches"
+          placeholder="26"
           required
         />
 
@@ -203,8 +217,9 @@ const Admin = () => {
           name="frameSize"
           value={formData.frameSize}
           onChange={handleChange}
+          onFocus={handleFocus}
           className="p-3 rounded block mb-2 bg-white text-black w-full"
-          placeholder="18 inches"
+          placeholder="18"
           required
         />
 

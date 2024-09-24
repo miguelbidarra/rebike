@@ -9,7 +9,7 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 
 export const metadata = {
   title: "reBike",
-  description: "Get your second hand bike",
+  description: "Discover a new 3D printed puzzle every month! Delivered straight to your door.",
 };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
