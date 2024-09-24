@@ -5,9 +5,6 @@ import { motion } from "framer-motion";
 import {
   Card,
   CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import Image from "next/image";
 import Modal from "@/components/Modal";
@@ -73,12 +70,6 @@ export default function Component() {
                       />
                     </div>
                   </CardContent>
-                  <CardHeader>
-                    <CardTitle className="text-primary text-center">
-                      {bicycle.name}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardFooter />
                 </Card>
               </motion.div>
             ))}

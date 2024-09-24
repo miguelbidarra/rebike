@@ -1,6 +1,9 @@
-import React from "react";
+"use client";
 
-const SettingsPage = () => {
+import React from "react";
+import { signOut } from 'next-auth/react';
+
+const Profile = () => {
   return (
     <div className="min-h-screen flex justify-center items-center p-4 bg-gray-100">
       <div className="w-full max-w-5xl flex bg-white rounded-lg shadow-lg">
@@ -27,6 +30,14 @@ const SettingsPage = () => {
                 >
                   Basic Info
                 </a>
+              </li>
+              <li>
+                <button
+                  onClick={() => signOut()}
+                  className="block text-gray-700 font-medium hover:text-indigo-500"
+                >
+                  Logout
+                </button>
               </li>
             </ul>
           </nav>
@@ -75,4 +86,4 @@ const SettingsPage = () => {
   );
 };
 
-export default SettingsPage;
+export default Profile;

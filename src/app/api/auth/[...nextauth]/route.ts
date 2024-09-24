@@ -43,6 +43,15 @@ export const authOptions = {
   pages: {
     signIn: "/auth/login",
   },
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      // Redirect to home page on sign out
+      if (url === "/api/auth/signout") {
+        return baseUrl;
+      }
+      return url.startsWith(baseUrl) ? url : baseUrl;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);

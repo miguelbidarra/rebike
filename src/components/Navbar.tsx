@@ -4,8 +4,13 @@ import { useState } from "react";
 import { FaUserCircle } from "react-icons/fa"; // Mobile menu icon and account icon
 import { TiThMenu } from "react-icons/ti";
 import Image from "next/image";
+import { Session } from "next-auth";
 
-export default function Navbar() {
+interface NavbarProps {
+  session: Session | null;
+}
+
+export default function Navbar({ session }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -35,11 +40,13 @@ export default function Navbar() {
             <span className="text-accent">re</span>
             <span className="text-primary">Bike</span>
           </Link>
-          <Link href="/auth/login" className="hidden sm:block">
-            <button className="text-primary hover:text-accent px-4 py-2">
-              I have a bike
-            </button>
-          </Link>
+          {session && (
+            <Link href="/profile" className="hidden sm:block">
+              <button className="text-primary hover:text-accent px-4 py-2">
+                Profile
+              </button>
+            </Link>
+          )}
         </div>
 
         {/* Right - Account Icon */}
@@ -66,12 +73,13 @@ export default function Navbar() {
             </button>
           </Link>
 
-          <Link href="/auth/login">
-            <button className="text-primary hover:text-accent px-4 py-2">
-              I have a bike
-            </button>
-          </Link>
-
+          {session && (
+            <Link href="/">
+              <button className="text-primary hover:text-accent px-4 py-2">
+                Profile
+              </button>
+            </Link>
+          )}
           <Link href="/admin">
             <FaUserCircle className="text-2xl text-primary hover:text-accent cursor-pointer" />
           </Link>
