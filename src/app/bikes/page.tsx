@@ -2,12 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Modal from "@/components/Modal";
+import ProductModal from "@/components/ProductModal";
 
 export default function Component() {
   interface Bicycle {
@@ -44,7 +42,13 @@ export default function Component() {
 
   return (
     <>
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal} bicycle={selectedBicycle} />
+      <ProductModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        bicycle={selectedBicycle}
+      />
+
+      {/*<Modal isOpen={isModalOpen} onClose={handleCloseModal} bicycle={selectedBicycle} />*/}
       <div className="min-h-screen bg-background text-text">
         <div className="container mx-auto py-12 px-4 md:px-6">
           <h1 className="text-3xl font-bold mb-6 text-center text-primary">
