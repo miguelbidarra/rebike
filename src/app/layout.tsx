@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import { Poppins } from "next/font/google";
 import { ReactNode } from "react";
 import { getServerSession } from "next-auth/next"; // Server session
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"; // Your NextAuth options
+import { authOptions } from "@/lib/auth"; // Your NextAuth options
 import "./globals.css";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });

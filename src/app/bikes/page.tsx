@@ -2,10 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import Image from "next/image";
-import Modal from "@/components/Modal";
 import ProductModal from "@/components/ProductModal";
+import Image from 'next/image';
 
 export default function Component() {
   interface Bicycle {
@@ -62,8 +60,8 @@ export default function Component() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleBicycleClick(bicycle)}
               >
-                <Card className="flex flex-col bg-secondary relative rounded-2xl">
-                  <CardContent className="flex-grow">
+                <div className="flex flex-col bg-background relative rounded-2xl border text-gray-900 shadow">
+                  <div className="flex-grow p-6 pt-0">
                     <div className="w-full h-48 mb-4 rounded-2xl overflow-hidden">
                       <Image
                         src={bicycle.image}
@@ -73,8 +71,8 @@ export default function Component() {
                         className="rounded-2xl"
                       />
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>

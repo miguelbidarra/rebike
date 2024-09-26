@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import db from "@/libs/db";
+import db from "@/lib/db";
 
 export async function POST(request: Request) {
   try {
@@ -14,12 +14,8 @@ export async function POST(request: Request) {
 
     if (userFound) {
       return NextResponse.json(
-        {
-          message: "Email already exists",
-        },
-        {
-          status: 400,
-        }
+        { message: "Email already exists" },
+        { status: 400 }
       );
     }
 
@@ -31,12 +27,8 @@ export async function POST(request: Request) {
 
     if (usernameFound) {
       return NextResponse.json(
-        {
-          message: "username already exists",
-        },
-        {
-          status: 400,
-        }
+        { message: "username already exists" },
+        { status: 400 }
       );
     }
 
@@ -48,18 +40,13 @@ export async function POST(request: Request) {
         password: hashedPassword,
       },
     });
-
     const { ...user } = newUser;
 
     return NextResponse.json(user);
   } catch (error) {
     return NextResponse.json(
-      {
-        message: (error as Error).message,
-      },
-      {
-        status: 500,
-      }
+      { message: (error as Error).message },
+      { status: 500 }
     );
   }
 }

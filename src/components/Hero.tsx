@@ -9,11 +9,13 @@ const Hero = () => {
       <section className="container mx-auto px-6 py-40 flex flex-col md:flex-row items-center">
         <div className="lg:w-1/2 mb-10 md:mb-0">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Ride, Return, Repeat with rebike
+            Ride, Return, Repeat with{" "}
+            <span className="text-[var(--accent)]">re</span>
+            <span className="text-[var(--primary)]">Bike</span>
           </h1>
           <p className="text-xl mb-8">
-            A sustainable solution for short-term bike needs. Rent a
-            second-hand bike and return it when you&apos;re done.
+            A sustainable solution for short-term bike needs. Rent a second-hand
+            bike and return it when you&apos;re done.
           </p>
           <div className="space-x-4 md:flex md:justify-center">
             <Link
