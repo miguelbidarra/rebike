@@ -3,7 +3,9 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import ProductModal from "@/components/ProductModal";
+import ModalDrawer from "@/components/ModalDrawer";
 import Image from 'next/image';
+import { useMediaQuery, useTheme } from "@mui/material";
 
 export default function Component() {
   interface Bicycle {
@@ -18,6 +20,10 @@ export default function Component() {
   const [bicycles, setBicycles] = useState<Bicycle[]>([]);
   const [selectedBicycle, setSelectedBicycle] = useState<Bicycle | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     async function fetchBicycles() {
@@ -30,11 +36,20 @@ export default function Component() {
 
   const handleBicycleClick = (bicycle: Bicycle) => {
     setSelectedBicycle(bicycle);
-    setIsModalOpen(true);
+    if (isSmallScreen) {
+      setIsDrawerOpen(true);
+    } else {
+      setIsModalOpen(true);
+    }
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setSelectedBicycle(null);
+  };
+
+  const handleCloseDrawer = () => {
+    setIsDrawerOpen(false);
     setSelectedBicycle(null);
   };
 
@@ -46,7 +61,13 @@ export default function Component() {
         bicycle={selectedBicycle}
       />
 
-      {/*<Modal isOpen={isModalOpen} onClose={handleCloseModal} bicycle={selectedBicycle} />*/}
+      <ModalDrawer
+        bicycle={selectedBicycle}
+        isOpen={isDrawerOpen}
+        onClose={handleCloseDrawer}
+
+      />
+
       <div className="min-h-screen bg-background text-text">
         <div className="container mx-auto py-12 px-4 md:px-6">
           <h1 className="text-3xl font-bold mb-6 text-center text-primary">

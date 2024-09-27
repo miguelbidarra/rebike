@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { FaGoogle } from "react-icons/fa";
 
 function LoginPage() {
   const {
@@ -28,6 +29,16 @@ function LoginPage() {
     }
   });
 
+  const handleGoogleSignIn = async () => {
+    const res = await signIn("google", { redirect: false });
+    if (res && !res.error) {
+      router.push('/bikes');
+      router.refresh();
+    } else {
+      setError(res?.error || "Google Sign In failed");
+    }
+  };
+
   return (
     <div className="min-h-screen flex justify-center items-center p-4">
       <form onSubmit={onSubmit} className="w-full max-w-md p-8 rounded-lg border border-secondary">
@@ -36,6 +47,16 @@ function LoginPage() {
         )}
 
         <h1 className="text-primary font-bold text-4xl mb-4 text-center">Login</h1>
+
+        {/* Google Sign In Button */}
+        <button
+          type="button"
+          onClick={handleGoogleSignIn}
+          className="w-full bg-white text-black border border-gray-300 p-3 rounded-lg mb-4 flex items-center justify-center hover:bg-gray-100 transition-colors"
+        >
+          <FaGoogle className="mr-2" size={24} />
+          Sign in with Google
+        </button>
 
         <label htmlFor="email" className="text-black mb-2 block text-sm">
           Email:
